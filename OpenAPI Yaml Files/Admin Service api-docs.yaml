@@ -1,0 +1,208 @@
+---
+openapi: 3.0.1
+info:
+  title: TicketAppProject API
+  description: Main API Information
+  version: '1.0'
+servers:
+- url: http://localhost:8083
+  description: Generated server url
+paths:
+  "/admins":
+    post:
+      tags:
+      - admin-controller
+      operationId: registerAdmin
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/AdminDto"
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            "*/*":
+              schema:
+                type: string
+  "/admins/{email}/{password}":
+    post:
+      tags:
+      - admin-controller
+      operationId: loginAdmin
+      parameters:
+      - name: email
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: password
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            "*/*":
+              schema:
+                type: string
+  "/admins/travels/{email}":
+    post:
+      tags:
+      - admin-controller
+      operationId: addTravel
+      parameters:
+      - name: email
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/TravelDto"
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/TravelDto"
+  "/admins/travels":
+    get:
+      tags:
+      - admin-controller
+      operationId: getTravelByPropertiesOrAll
+      parameters:
+      - name: vehicle
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - BUS
+          - PLANE
+      - name: to
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: from
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: arrivalTime
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: departureTime
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: OK
+          content:
+            "*/*":
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/TravelDto"
+  "/admins/total/{email}":
+    get:
+      tags:
+      - admin-controller
+      operationId: getTotalAndCounts
+      parameters:
+      - name: email
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            "*/*":
+              schema:
+                type: string
+  "/admins/travels/{travelId}/{email}":
+    delete:
+      tags:
+      - admin-controller
+      operationId: cancelTravel
+      parameters:
+      - name: travelId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: email
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            "*/*":
+              schema:
+                type: string
+components:
+  schemas:
+    AdminDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        email:
+          type: string
+        password:
+          type: string
+    TravelDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        vehicle:
+          type: string
+          enum:
+          - BUS
+          - PLANE
+        ticketPrice:
+          type: number
+        fromStation:
+          type: string
+        toStation:
+          type: string
+        seatCapacity:
+          type: integer
+          format: int32
+        departureTime:
+          type: string
+          format: date-time
+        arrivalTime:
+          type: string
+          format: date-time
+        purchasedSeats:
+          uniqueItems: true
+          type: array
+          items:
+            type: integer
+            format: int32
+        isCanceled:
+          type: boolean

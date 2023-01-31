@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/ticketApp.iml" filepath="$PROJECT_DIR$/.idea/ticketApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ticketapp-admin-service/ticketapp-admin-service.iml" filepath="$PROJECT_DIR$/ticketapp-admin-service/ticketapp-admin-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ticketapp-notification-service/ticketapp-notification-service.iml" filepath="$PROJECT_DIR$/ticketapp-notification-service/ticketapp-notification-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ticketapp-payment-service/ticketapp-payment-service.iml" filepath="$PROJECT_DIR$/ticketapp-payment-service/ticketapp-payment-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ticketapp-service/ticketapp-service.iml" filepath="$PROJECT_DIR$/ticketapp-service/ticketapp-service.iml" />
+    </modules>
+  </component>
+</project>
